@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (var thread in (List<ZooWebThreadServiceModel>)ViewData["Threads"])
+{
+    <div class="page-thread d-flex flex-column">
+        <header class="page-thread-heading d-flex justify-content-start">
+            <div class="page-thread-heading-picture">
+                <img src="~/images/monkas.jpg" width="45px" height="45px">
+            </div>
+            <div class="page-thread-heading-category h5 ms-3 mt-1">g/@thread.Community.Name</div>
+            <div class="page-thread-heading-timestamp ms-3 mt-1">@thread.CreatedOn.ToString("dd/MM/yyyy HH:mm")</div>
+        </header>
+        <main class="page-thread-content mt-4">
+            <a class="plain-link" href="/Thread/Details?threadId=@thread.Id">
+                <h4 class="page-thread-content-name">@thread.Title</h4>
+                <p class="page-thread-content-preview mt-3">
+                    @Html.Raw(thread.Content)
+                </p>
+            </a>
+        </main>
+        <footer class="page-thread-footer d-flex justify-content-start">
+            <div class="page-thread-footer-reactions d-flex justify-content-start">
+                <img class="mt-1" src="~/images/reaction.svg" width="20px" height="20px">
+                <div class="ms-2">@thread.Reactions.Count</div>
+            </div>
+            <div class="page-thread-footer-comments d-flex justify-content-start ms-4">
+                <img class="mt-1" src="~/images/comment.svg" width="20px" height="20px">
+                <div class="ms-2">@thread.Comments.Count</div>
+            </div>
+            <div class="page-thread-footer-follow ms-4">
+                <img src="~/images/notification-enable.svg" width="20px" height="20px">
+                <img src="~/images/notification-disable.svg" width="20px" height="20px">
+            </div>
+            <div class="page-thread-footer-share ms-4">
+                <img src="~/images/share.svg" width="20px" height="20px">
+            </div>
+        </footer>
+    </div>
+}
